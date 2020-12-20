@@ -3,27 +3,28 @@ package pers.maplearning.removeduplicateletters;
 import java.util.ArrayList;
 import java.util.Collections;
 
-class Solution
-    {
-    public String removeDuplicateLetters(String s)
-        {
-        ArrayList<Integer> characters=new ArrayList<Integer>(Collections.nCopies(26,0));
-        for(Character c: s.toCharArray())
-            {
-            int codepoint=c-'a';
-            characters.set(codepoint,characters.get(codepoint)+1);
-            }
-        StringBuilder stringBuilder=new StringBuilder();
-        for(var i=characters.listIterator();i.hasNext();)
-            {
-             var idx =i.nextIndex();
-             var v=i.next();
-            if(v>0)
-
-                {
-                stringBuilder.append((char)(idx+'a'));
-                }
-            }
-        return stringBuilder.toString();
+class Solution{
+    public String removeDuplicateLetters(String s){
+        boolean[] vis=new boolean[26];
+        int[]     num=new int[26];
+        for(int i=0;i<s.length();i++){
+            num[s.charAt(i)-'a']++;
         }
+        StringBuffer sb=new StringBuffer();
+        for(int i=0;i<s.length();i++){
+            char ch=s.charAt(i);
+            if(!vis[ch-'a']){
+                while(sb.length()>0&&sb.charAt(sb.length()-1)>ch&&num[sb.charAt(sb.length()-1)-'a']>0){
+                    vis[sb.charAt(sb.length()-1)-'a']=false;
+                    sb.deleteCharAt(sb.length()-1);
+                }
+                vis[ch-'a']=true;
+                sb.append(ch);
+            }
+            num[ch-'a']-=1;
+        }
+        return sb.toString();
     }
+}
+
+
