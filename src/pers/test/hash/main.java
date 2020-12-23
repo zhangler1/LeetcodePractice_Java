@@ -1,8 +1,6 @@
 package pers.test.hash;
 
-import javax.swing.plaf.metal.MetalIconFactory;
-import java.lang.reflect.Array;
-import java.sql.SQLOutput;
+
 import java.util.ArrayList;
 
 public class main {
